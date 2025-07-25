@@ -1,0 +1,4 @@
+discord.py
+numpy
+sentence-transformers
+scikit-learn
