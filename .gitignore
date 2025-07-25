@@ -1,8 +1,9 @@
 # Trained models
 models/
 
-# my token
+# my token and very secret scripts
 TOKEN.txt
+site/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
