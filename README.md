@@ -11,8 +11,9 @@ While I don't recommend doing this as it's kind of really made for me, and the s
 ```
 git clone https://github.com/QueasyQuery/OCKY-bot
 ```
-2. Running run.bat
-3. Change responses.json to whatever you want and restart the system.
+2. Changing responses.json to whatever you want
+3. Running run.bat
+
 
 
 ##
