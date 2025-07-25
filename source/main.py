@@ -28,7 +28,7 @@ class OCKYBot:
 
     def load_json(self, filename):
         '''load dict from JSON file'''
-        with open(filename, 'r') as f:
+        with open(filename, 'r',encoding="utf-8") as f:
             return json.load(f)
     
     def run(self, token):
