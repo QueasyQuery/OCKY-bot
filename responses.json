@@ -21,7 +21,7 @@
     "Hoiiii mag ik deel zijn van het gesprek?? :3",
     "Hoi!!! ^_^ wat zeg je??? Kun je meer woorden gebruiken die ik ken misschien? :3",
     "Hoi!!! Als je iets probeert te zeggen, ik ben analfabeet en herken alleen een paar woorden :3c",
-	  "Haaaaiiiiii iedereen!!!",
+    "Haaaaiiiiii iedereen!!!",
     "Ocky hier! Heb je me gemist? :3",
     "Ochtend! Of... avond? Ik heb geen besef van tijd in mijn code ^_^;;",
     "Haaallooo!!! Alles goed?",
@@ -31,7 +31,7 @@
   "farewell": [
     "Dagdag!!! Waar ga je heen.",
     "Doeiiii :D maar ik blijf gewoon hier.",
-	  "Toedels!",
+    "Toedels!",
     "Dagdag!! Ik ga niks doen ergens anders in deze cloudserver!! ^_^"
   ],
   "agreement": [
@@ -80,7 +80,7 @@
     "transgender!!!",
     "Ik heb geen gender ^_^!!!",
     "ik heb geen lange termijn geheugen... ^_^;;;",
-	  "OckyBOT meld zich voor dienst! En met dienst... laten we maar zeggen... ^_^"
+    "OckyBOT meld zich voor dienst! En met dienst... laten we maar zeggen... ^_^"
   ],
   "question": [
     "Hai! Is er iets?",
@@ -93,16 +93,16 @@
     "Geen idee! ^w^;;",
     "Misschien wel!!! :P",
     "Hmmm, dat kun je beter vragen aan iemand anders!!! :U",
-	  "Wat bedoel je precies? Ik heb maar één context vector je moet het simpeler zeggen...",
-    "Uhhh… kun je dat uitleggen alsof ik vijf regels code ben? :3",
+    "Wat bedoel je precies? Ik heb maar \u00e9\u00e9n context vector je moet het simpeler zeggen...",
+    "Uhhh\u2026 kun je dat uitleggen alsof ik vijf regels code ben? :3",
     "Hmmmmm... denk je dat ik dat weet? Misschien wel :3!!"
   ],
   "answers": [
-	"Het was goed :)",
-	"Hmmm, dat ging heel slecht!!",
-	"Ik denk dat ik dat niet mag weten ^_^;;;",
-	"Ik zou dat doen!! :D maar met toezicht...",
-	"Van mij mag dat :))) ga je gang ^_^"
+    "Het was goed :)",
+    "Hmmm, dat ging heel slecht!!",
+    "Ik denk dat ik dat niet mag weten ^_^;;;",
+    "Ik zou dat doen!! :D maar met toezicht...",
+    "Van mij mag dat :))) ga je gang ^_^"
   ],
   "curses": [
     "Ho!!! Geen scheldwoorden in mijn server!! ^_^;;;",
@@ -110,7 +110,7 @@
     "Oh!! Dat mag je niet zeggen, daar kan ik niet tegen!! >:I",
     "Wat!!! geen vloeken in deze mooie discord alsjeblieft... T_T",
     "Taalgebruik!! >:O",
-	  "Tsk tsk tsk... netjes blijven alsjeblieft! :<"
+    "Tsk tsk tsk... netjes blijven alsjeblieft! :<"
   ],
   "excitement": [
     "Geeeeen probleem!!!! Ocky redt de dag!!!",
@@ -141,7 +141,7 @@
     "Geen idee! ^w^;;"
   ],
   "unsorted": [
-	  "Haiai!!! Probeer eens mij te pingen?",
+    "Haiai!!! Probeer eens mij te pingen?",
     "Bumpkincraft!",
     "Jajaja, daar zijn we!",
     "Bumpkinnnnncraft!!!!! :D",
@@ -157,6 +157,9 @@
     "Oh ik hou van minecraft!! Daar kijk ik naar...",
     "Minecraft!!! Ik ben altijd beide in minecraft en in discord!! Zo cool!!",
     "Hatsjoe!!! Sorry!! Ik heb bot hooikoorts... ^__^;;",
-	""
+    ""
+  ],
+  "test": [
+    "example"
   ]
 }
