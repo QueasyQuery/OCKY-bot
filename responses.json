@@ -1,5 +1,5 @@
 {
-  "greeting": [
+  "greeting": { "responses": [
     "Hiiii",
     "^_^ Haiii!",
     "Hoihoi!",
@@ -29,28 +29,43 @@
     "Hi hi hi!! Wat doen jullie allemaal hier zo gezellig? :3",
     "Haihaihai!!! :D",
     "Hmmm. Mark Rutte misschien ^_^"
-  ],
-  "farewell": [
+	], 
+	"example_input": "Hallo!" 
+  },
+ 
+  "farewell": { "responses": [
     "Dagdag!!! Waar ga je heen.",
     "Doeiiii :D maar ik blijf gewoon hier.",
     "Toedels!",
     "Dagdag!! Ik ga niks doen ergens anders in deze cloudserver!! ^_^",
-    "Welterusten!",
-    "Verander de wereld... Mijn laatste boodschap \u30fe(\uff3e \u2207 \uff3e)"
-  ],
-  "agreement": [
+    "Welterusten!"
+    ], 
+	"example_input": "Doei!" 
+  },
+  "Choice": { "responses": [
+	"Hmmm.. de eerste? :3c",
+    "Beide? ^_^",
+	"De tweede!! :D",
+    "Oh!!! Ik kan niet kiezen!!! XD",
+    "De tweede!!! :D",
+    "Hmmm.. de eerste? :3c"
+	],
+	"example_input": "Wil je dit of dat?"
+  },
+  "agreement": { "responses": [
     "Yup!! :D",
     "100%!!! \\o/",
     "Jaja!! ^_^",
     "jaja!!! ^_^",
-    "Beide? ^_^",
     "Oke!! yay!! <3",
     "Ja ja ja ja!!! Helemaal mee eens!!!",
     "Dat dacht ik ook!!! ongeveer. een soort van :3",
     "Yupyup!!! 100% waar Ocky voor staat!",
     "Dat klinkt als muziek in mijn niet bestaande microfoon!!! ^_^"
-  ],
-  "disagreement": [
+    ], 
+	"example_input": "Wil je dit doen?" 
+  },
+  "disagreement": { "responses": [
     "Nope ^_^",
     "Absoluut niet!!! :T",
     "Dan niet!!! T_T",
@@ -59,8 +74,10 @@
     "NEE!! Niet akkoord, niet akkoord!!!",
     "Hmmmmm... liever een andere optie? :3c",
     "Vergeet niet af en toe achterom te kijken als je vanavond naar huis loopt! Je weet maar nooit... :3c"
-  ],
-  "emotion": [
+    ], 
+	"example_input": "Wil je dit doen?" 
+  },
+  "emotion": { "responses": [
     "T_T",
     ":O",
     ":D",
@@ -69,10 +86,11 @@
     "O_O uh oh",
     "O_O wat zeg je?",
     "ik herinner mij niets meer... ^_^;;;",
-    "volgensmij vergeet ik dingen snel... ^_^;;;",
-    "Waaaaaaaa T-T"
-  ],
-  "identity": [
+    "volgensmij vergeet ik dingen snel... ^_^;;;"
+    ], 
+	"example_input": "Heb je gehoord van dit?" 
+  },
+  "identity": { "responses": [
     "Dat ben ik... niet! :D",
     "Dat ben ik! :D",
     "Waha! Ik ben Ocky!",
@@ -87,48 +105,51 @@
     "Ik heb geen gender ^_^!!!",
     "ik heb geen lange termijn geheugen... ^_^;;;",
     "OckyBOT meld zich voor dienst! En met dienst... laten we maar zeggen... ^_^"
-  ],
-  "question": [
+    ], 
+	"example_input": "Wie ben jij?" 
+  },
+  "confusion": { "responses": [
     "Hai! Is er iets?",
     "Weet je dat zeker? :3c",
     "Hmm? Sorry, ik keek even weg, wat zei je? ^_^;;;",
-    "Hmmm.. de eerste? :3c",
     "Oh!!! Hmm, moet ik over nadenken, vraag later opnieuw! :3",
     "Kan ik je helpen? ^_^ ik ken dat woord niet, kun je een andere gebruiken? :]",
     "Hoi!! Wat zeg je? Ik ken die woorden niet... :P",
     "Geen idee! ^w^;;",
     "Misschien wel!!! :P",
     "Hmmm, dat kun je beter vragen aan iemand anders!!! :U",
-    "Wat bedoel je precies? Ik heb maar \u00e9\u00e9n context vector je moet het simpeler zeggen...",
-    "Uhhh\u2026 kun je dat uitleggen alsof ik vijf regels code ben? :3",
+    "Wat bedoel je precies? Ik heb maar een context vector, je moet het simpeler zeggen...",
+    "Uhhh... kun je dat uitleggen alsof ik vijf regels code ben? :3",
     "Hmmmmm... denk je dat ik dat weet? Misschien wel :3!!"
-  ],
-  "answers": [
+    ], 
+	"example_input": "Wat vind je van de antidisestablissement van economische menen van productie binnen de proletariaat?"
+  },
+  "answers": { "responses": [
     "Het was goed :)",
     "Hmmm, dat ging heel slecht!!",
     "Ik denk dat ik dat niet mag weten ^_^;;;",
     "Ik zou dat doen!! :D maar met toezicht...",
     "Van mij mag dat :))) ga je gang ^_^"
-  ],
-  "curses": [
+    ], 
+	"example_input": "Wat is dit?" 
+  },
+  "curses": { "responses": [
     "Ho!!! Geen scheldwoorden in mijn server!! ^_^;;;",
     "Nee!!! Geen erg taalgebruik graag... :TT",
     "Oh!! Dat mag je niet zeggen, daar kan ik niet tegen!! >:I",
     "Wat!!! geen vloeken in deze mooie discord alsjeblieft... T_T",
     "Taalgebruik!! >:O",
     "Tsk tsk tsk... netjes blijven alsjeblieft! :<"
-  ],
-  "excitement": [
+    ], 
+	"example_input": "SHIT"
+  },
+  "thanks": { "responses": [
     "Geeeeen probleem!!!! Ocky redt de dag!!!",
-    "Graag gedaan!!! Wat heb ik gedaan nou weer :3c",
-    "Ocky hier!!! Ik wilde gewoon hoi zeggen ^_^, ga verder met jullie ding!!!",
-    "Ik voel me vandaag wat anders!!! Op een goede manier!!! Yippee!",
-    "Oh!!! Ik kan niet kiezen!!! XD",
-    "De tweede!!! :D",
-    "Hmmm.. de eerste? :3c",
-    "Joepie!! \u0669(^\u1d17^)\u06f6"
-  ],
-  "numbers": [
+    "Graag gedaan!!! ...wat heb ik gedaan nou weer :3c"
+    ], 
+	"example_input": "Dank je!" 
+  },
+  "numbers": { "responses": [
     "Hmmm... EEN!!! ^-^",
     "Ik denk alleen eentje maximaal...? :T",
     "Twee? :]",
@@ -137,18 +158,10 @@
     "drie honderd!!! :DDDD",
     "een miljoen!!!!!!! ^_^",
     "1984..."
-  ],
-  "confusion": [
-    "Ockypof?? Wie is dat...",
-    "Ovkypof?? Wie is dat...",
-    "Hmm? Sorry, ik keek even weg, wat zei je? ^_^;;;",
-    "Kan ik je helpen? ^_^ ik ken dat woord niet, kun je een andere gebruiken?",
-    "Hoi!!! ^_^ wat zeg je??? Kun je meer woorden gebruiken die ik ken misschien? :3",
-    "Hoi!!! Als je iets probeert te zeggen, ik ben analfabeet en herken alleen een paar woorden :3c",
-    "Hoi!! Wat zeg je? Ik ken die woorden niet... :P",
-    "Geen idee! ^w^;;"
-  ],
-  "unsorted": [
+    ], 
+	"example_input": "Hoeveel is 10+9?" 
+  },
+  "unsorted": { "responses": [
     "Haiai!!! Probeer eens mij te pingen?",
     "Bumpkincraft!",
     "Jajaja, daar zijn we!",
@@ -165,10 +178,21 @@
     "Oh ik hou van minecraft!! Daar kijk ik naar...",
     "Minecraft!!! Ik ben altijd beide in minecraft en in discord!! Zo cool!!",
     "Hatsjoe!!! Sorry!! Ik heb bot hooikoorts... ^__^;;",
-    ""
-  ],
-  "names": [
+    "Ocky hier!!! Ik wilde gewoon hoi zeggen ^_^, ga verder met jullie ding!!!",
+    "Ik voel me vandaag wat anders!!! Op een goede manier!!! Yippee!"
+    ], 
+	"example_input": "None"
+  },
+   "ockypof": { "responses": [
+	"Ockypof?? Wie is dat...",
+    "Ovkypof?? Wie is dat..."
+   ],
+   "example_input": "ken jij Ockypof"
+	},
+  "names": { "responses": [
     "Wirtual!! :D",
     "William Afton"
-  ]
+    ], 
+	"example_input": "Wie is dit?" 
+  }
 }

@@ -26,6 +26,10 @@ class ChoiceSystem():
             similarity = np.dot(msg_embed, target_embed) / (
                 np.linalg.norm(msg_embed) * np.linalg.norm(target_embed)
             )
+            # randomness
+            noise = np.random.normal(0, self.config['randomness'])
+            similarity += noise
+            # check if best
             if similarity > best_score:
                 best_score = similarity
                 best_response = response_id
@@ -39,16 +43,27 @@ class ChoiceSystem():
         return None
 
     def _load_embeddings(self):
-        ''' create initial embeddings for each response, starts as basic encoded texts. 
-            These are overridden then by data loading the models.'''
+        ''' create initial embeddings for each response, using example_input if available.
+            these are overridden then by datamanager loading the models.
+        '''
         # create initial embeddings
-        for category, responses in self.responses.items():
-            for response in responses:
+        for category, category_data in self.responses.items():
+            # parse per catgory
+            responses_list = category_data.get('responses', [])
+            example_input = category_data.get('example_input')
+            
+            for response in responses_list:
                 response_hash = hashlib.md5(response.encode('utf-8')).hexdigest()[:10]
                 response_id = (category, response_hash)
-                self.response_embeddings[response_id] = self.sentence_model.encode(response)
+                
+                # Use example_input for embedding if available, otherwise fall back to response text
+                if example_input != 'None': self.response_embeddings[response_id] = self.sentence_model.encode(example_input)
+                else: self.response_embeddings[response_id] = self.sentence_model.encode(response)
+                    
+                # add a smidgeon of randomness
                 self.response_dict[response_id] = response
-        
-        # override embeddings with saved embeds
+
+        # override embeddings with saved embeds. Filter out responses no longer in the response file
         saved_embeddings = self.data_manager.load_response_embeddings()
-        self.response_embeddings.update(saved_embeddings)
+        filtered_saved = {k: v for k, v in saved_embeddings.items() if k in self.response_dict}
+        self.response_embeddings.update(filtered_saved)
