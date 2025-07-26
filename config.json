@@ -2,5 +2,6 @@
   "channel": 1397604532749467738,
 	"training": 1,
 	"learning_rate": 1,
-  "forceful_react_emote": "🗣️"
+  "forceful_react_emote": "🗣️",
+  "randomness": 0.05
   }
