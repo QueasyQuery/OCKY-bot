@@ -4,6 +4,7 @@ models/
 # my token and very secret scripts
 TOKEN.txt
 site/
+scripts/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
