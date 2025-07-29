@@ -39,7 +39,6 @@ class ChoiceSystem():
             print(f'CHOICE: {best_response}, score {best_score}')
             response_text = self.response_dict[best_response]
             return {'id': best_response, 'text': response_text, 'score': best_score}
-        
         return None
 
     def _load_embeddings(self):

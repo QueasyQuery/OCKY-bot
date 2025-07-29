@@ -1,26 +1,27 @@
 import json
-from sentence_transformers import SentenceTransformer
+import importlib
+from transformer_ram import RAMTransformer
 import asyncio
-
-from bot_logic import DiscordHandler
-from response_sys import ResponseSystem
-from choice_sys import ChoiceSystem
-from training import TrainingManager
-from data import DataManager
+import bot_logic
+import response_sys
+import choice_sys
+import training
+import data
 
 class OCKYBot:
     def __init__(self, config_file="config.json"):
         # load config, responses and transformer
         self.config = self.load_json(config_file)
         self.responses = self.load_json(self.config.get('response_file', 'responses.json'))
-        self.sentence_model = SentenceTransformer('paraphrase-multilingual-MiniLM-L12-v2')
+        self.sentence_model = RAMTransformer('paraphrase-multilingual-MiniLM-L12-v2')
 
         # initialize systems
-        self.data_manager = DataManager(self.config)
-        self.training_manager = TrainingManager(self.config, self.data_manager)
-        self.response_system = ResponseSystem(self.config, self.data_manager, self.sentence_model)
-        self.choice_system = ChoiceSystem(self.config, self.data_manager, self.sentence_model, self.responses)
-        self.discord_handler = DiscordHandler(self.config, self.data_manager, self)
+        self.data_manager     = data.DataManager(self.config)
+        self.training_manager = training.TrainingManager(self.config, self.data_manager)
+        self.response_system  = response_sys.ResponseSystem(self.config, self.data_manager, self.sentence_model)
+        self.choice_system    = choice_sys.ChoiceSystem(self.config, self.data_manager, self.sentence_model, self.responses)
+        self.discord_handler  = bot_logic.DiscordHandler(self.config, self.data_manager, self)
+        self.sentence_model.unload() # remove from RAM
 
         # misc
         self.bot = self.discord_handler.bot
@@ -41,6 +42,21 @@ class OCKYBot:
             channel = self.bot.get_channel(self.channel_id)
             await channel.edit(topic='**STATUS: OFFLINE**')
         await self.bot.close()
+
+    def reload(self, module):
+        match module:
+            case "response": 
+                importlib.reload(response_sys)
+                self.response_system  = response_sys.ResponseSystem(self.config, self.data_manager, self.sentence_model)
+            case "choice": 
+                importlib.reload(choice_sys)
+                self.choice_system = choice_sys.ChoiceSystem(self.config, self.data_manager, self.sentence_model, self.responses)
+            case "training": 
+                importlib.reload(training)
+                self.training_manager = training.TrainingManager(self.config, self.data_manager)
+            case "data": 
+                importlib.reload(data)
+                self.data_manager = data.DataManager(self.config)
 
 if __name__ == "__main__":
     # read token

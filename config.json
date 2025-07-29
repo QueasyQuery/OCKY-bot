@@ -3,5 +3,6 @@
 	"training": 1,
 	"learning_rate": 1,
   "forceful_react_emote": "🗣️",
-  "randomness": 0.05
+  "randomness": 0.05,
+  "ram_friendly": 1
   }

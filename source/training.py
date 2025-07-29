@@ -19,21 +19,20 @@ class TrainingManager():
             return
 
         # start training message
-        print("Training started!")
-        if message: 
-            status = await message.channel.send(f"Aan het trainen op {len(response_data)} feedback points...")
+        print("Training Loop Started!")
+        if message: status = await message.channel.send(f"Aan het trainen op {len(response_data)} feedback points...")
         
         # train systems
-        self._train_response_system(response_system, response_data)
+        response_data = self._train_response_system(response_system, response_data)
         self._train_choice_system(choice_system, choice_data)
         
         # save models
         self.data_manager.save_models(
             response_system.response_classifier,
             response_system.feature_scaler,
-            choice_system.response_embeddings
+            choice_system.response_embeddings,
+            response_data
         )
-        
         self._train_stats(choice_system)
 
         # end training message
@@ -44,21 +43,32 @@ class TrainingManager():
     def _train_response_system(self, response_system, datapoints):
         '''Train the response classifier'''
         X, y = [], []
+        # load old data
+        for data in self.data_manager.load_response_training_data():
+                X.append(data['features'])
+                y.append(data['should_respond'])
+
+        # new data
         for data in datapoints:
             if 'features' in data and 'should_respond' in data:
                 X.append(data['features'])
                 y.append(data['should_respond'])
-        
+
         if len(X) < 2:
             print("Not enough response training data")
             return
-            
+
         X = np.array(X)
         y = np.array(y)
         
-        # scale and train
-        X_scaled = response_system.feature_scaler.fit_transform(X)
-        response_system.response_classifier.fit(X_scaled, y)
+        # scale only if no scale yet
+        if not hasattr(response_system.feature_scaler, 'scale_'):
+              X_scaled = response_system.feature_scaler.fit_transform(X)
+        else: X_scaled = response_system.feature_scaler.transform(X)
+        response_system.response_classifier.fit(X_scaled, y) # fit
+
+        # update training data
+        return [{'features':f,'should_respond':sr} for f,sr in list(zip(X,y))[-1000:]]
 
     def _train_choice_system(self, choice_system, datapoints):
         '''update response embeddings based on feedback'''
@@ -103,10 +113,9 @@ class TrainingManager():
         negative = sum(1 for d in respond_data if d['should_respond'] == 0)
         
         if negative > 0:
-            ratio = positive / negative
-            print(f"{len(respond_data)} Training Feedback Points: ({ratio:.4f} POS/NEG ratio)")
-        else:
-            print(f"{len(respond_data)} Training Feedback Points: ({positive} positive, {negative} negative)")
+              ratio = positive / negative
+              print(f"{len(respond_data)} Training Feedback Points: ({ratio:.4f} POS/NEG ratio)")
+        else: print(f"{len(respond_data)} Training Feedback Points: ({positive} positive, {negative} negative)")
 
         # embedding drift (how much embeddings changed from original)
         total_drift = 0

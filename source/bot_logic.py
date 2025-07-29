@@ -1,6 +1,8 @@
 import time
 import discord
+from discord import app_commands
 from discord.ext import commands, tasks
+from add_response import ResponseAdder
 import asyncio
 
 class DiscordHandler():
@@ -37,6 +39,12 @@ class DiscordHandler():
         @self.bot.event
         async def on_ready():
             print(f'OCKY system active as {self.bot.user}')
+            # init response adder
+            await self.bot.add_cog(ResponseAdder(self.bot,self.ocky_bot,self.data_manager))
+            synced = await self.bot.tree.sync()
+            print(f"Synced {len(synced)} slash commands")
+
+            # training loop & finish
             self.training_loop.start()
             if self.channel_id: 
                 self.channel = self.bot.get_channel(self.channel_id)
@@ -45,43 +53,47 @@ class DiscordHandler():
 
         @self.bot.event
         async def on_message(message: discord.Message):
-            if message.author.bot: return
-            
-            # process commands first
-            await self._check_commands(message)
-            
-            print(f'message got: {message.content}')
-            
-            # track message activity
-            self.data_manager.track_channel_activity(message)
+            try:
+                if message.author.bot: return
+                
+                # process commands first
+                await self._check_commands(message)
+                
+                print(f'message got: {message.content}')
+                
+                # track message activity
+                self.data_manager.track_channel_activity(message)
 
-            # check if we should only respond in specific channel
-            if self.channel_id and (message.channel.id != self.channel_id): return
+                # ask response system: should we respond?
+                response_chance = self.ocky_bot.response_system.should_respond(message, self.bot.user)
 
-            # ask response system: should we respond?
-            response_chance = self.ocky_bot.response_system.should_respond(message, self.bot.user)
-            
-            # decide to respond based on probability
-            if response_chance > 0.5:  # 50% threshold
-                # ask choice system: what to respond with?
-                response = self.ocky_bot.choice_system.get_response(message)
-                if response: await self.send_response(message, response)
-        
+                # check if we should only respond in specific channel
+                if self.channel_id and (message.channel.id != self.channel_id): return
+                
+                # decide to respond based on probability
+                if response_chance > 0.5:  # 50% threshold
+                    # ask choice system: what to respond with?
+                    response = self.ocky_bot.choice_system.get_response(message)
+                    if response: await self.send_response(message, response)
+            # always unload to end with
+            finally: self.ocky_bot.choice_system.sentence_model.unload()
+
         @self.bot.event
         async def on_reaction_add(reaction, user):
             if user.bot: return
-            print(f"reaction got: {reaction.emoji}")
-
             # if emote is "forceful reaction emote" then respond
             if reaction.emoji == self.config['forceful_react_emote']:
-                print("forcing response:")
+                print("Respond Emote Received.")
                 message = reaction.message
                 response = self.ocky_bot.choice_system.get_response(message)
                 if response: 
                     await self.send_response(message, response)
+                self.ocky_bot.choice_system.sentence_model.unload()
 
             # process feedback
-            await self.data_manager.process_feedback(reaction, user, is_add=True, bot_user=self.bot.user)
+            if reaction.emoji in ["👍","👎","🟩","🟥"]:
+                value = await self.data_manager.process_feedback(reaction, user, is_add=True, bot_user=self.bot.user)
+                print(f"Feedbacd incorporated ({value})")
         
         @self.bot.event
         async def on_reaction_remove(reaction, user):
@@ -100,7 +112,7 @@ class DiscordHandler():
 
     async def _check_commands(self, message):
         content = message.content.lower()
-        
+
         if "retrain" in content and "models" in content:
             print("Manual retraining...")
             await self.ocky_bot.training_manager.training_loop(

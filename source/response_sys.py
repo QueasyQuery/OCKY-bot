@@ -18,28 +18,17 @@ class ResponseSystem():
         # get features from message
         features = self._extract_message_features(message, bot_user)
         
-        # record this as a training point
-        self.data_manager.training_data.append({
-            'type': 'respond_request',
-            'message': message.content,
-            'message_id': message.id,
-            'features': features['basic_features'],
-            'should_respond': 0,  # Will be set to 1 if user reacts with 🗣️
-            'timestamp': time.time()
-        })
-        
+        # register as training point
+        self.data_manager.record_user_message(message, features)
+
         # model not trained yet: never respond to messages
-        if (not hasattr(self.response_classifier, 'coef_')): 
-            return 0.0
+        if (not hasattr(self.response_classifier, 'coef_')): return 0.0
         
         # use trained model
-        try:
-            basic_scaled = self.feature_scaler.transform([features['basic_features']])
-            probability = self.response_classifier.predict_proba(basic_scaled)[0][1]
-        except:
-            return 0.0
+        basic_scaled = self.feature_scaler.transform([features['basic_features']])
+        probability = self.response_classifier.predict_proba(basic_scaled)[0][1]
 
-        # is training? then don't respond but return the respond result
+        # is training? then don't respond but print the respond result
         if (self.config.get('training', 0) == 1):
             print(f"respond? {probability}")
             return 0.0

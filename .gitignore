@@ -1,10 +1,11 @@
 # Trained models
 models/
 
-# my token and very secret scripts
+# my token and very secret scripts and also my TODO list
 TOKEN.txt
 site/
 scripts/
+todo.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
